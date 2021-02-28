@@ -2,7 +2,7 @@
 
 ## Video Tutorial
 
-The following tutorial explains how to set up this project using PostgreSQL and Heroku.
+The following tutorial explains how to set up this project using PostgreSQL and Herokuuuuuu.
 
 [![Setting up PostgreSQL for Build Week](https://img.youtube.com/vi/kTO_tf4L23I/maxresdefault.jpg)](https://www.youtube.com/watch?v=kTO_tf4L23I)
 
