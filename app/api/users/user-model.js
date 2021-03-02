@@ -27,7 +27,7 @@ function updateUser(id,changes){
     return db("users")
     .where(id)
     .update(changes)
-    .then((id)=>{
+    .then(([id])=>{
         return findById(id);
     })
 }
