@@ -4,19 +4,22 @@ function find() {
     return db("users")
 }
 
-function findby(filter) {
+function findBy(filter) {
     return db("users").where(filter)
+    // .select("users.user_id","users.username","users.password")
+    
 }
 
 async function add(user) {
     const [id] = await db("users")
     .insert(user,"user_id")
-    return findbyId(id) 
+    return findById(id) 
 }
 
-function findbyId(id) {
+function findById(id) {
     return db("users")
     .where("users.user_id",id)
+    .select("users.user_id","users.username","users.phoneNumber")
     .first()
 }
 
@@ -24,7 +27,7 @@ function findbyId(id) {
 
 module.exports = {
     find,
-    findby,
-    findbyId,
+    findBy,
+    findById,
     add
 }
