@@ -5,6 +5,17 @@ const Users = require("./user-model")
 const { isValid } = require("./isValid")
 const { jwtSecret } = require("../../middleware/secret")
 
+router.get("/",(req,res)=>{
+    Users.find()
+    .then((user)=>{
+        res.status(200).json(user)
+    })
+    .catch((err)=>{
+        res.status(500).json(err)
+    })
+    
+})
+
 router.post("/register",(req,res) => {
     const newUser = req.body
     // console.log(req.body)
