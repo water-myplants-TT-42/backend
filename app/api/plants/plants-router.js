@@ -27,19 +27,8 @@ router.get("/:id", (req,res) => {
     }
 })
 
-router.post("/",async (req,res) => {
-    const newPlant = req.body
-    if(newPlant) {
-        Plants.addPlant(newPlant)
-        .then(plant => {
-            res.status(201).json(plant)
-        })
-        .catch(err => {
-            res.status(500).json(err.message + " in post plant")
-        })
-    }else {
-        res.status(400).json("nickname,species and h2oFrequency are required")
-    }
+router.post("/id",(req,res) => {
+   
 })
 
 router.put("/:id", (req,res) => {

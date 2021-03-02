@@ -15,6 +15,25 @@ router.get("/",(req,res)=>{
     })
 })
 
+router.put("/:id", (req,res) => {
+  const id = req.params.id
+  const body = req.body
+  const rounds = process.env.BCRYPT_ROUNDS || 8
+  const hash = bcryptjs.hashSync(body.password,rounds)
+        body.password = hash
+  if(id && body) {
+    Users.updateUser(id,body)
+    .then(editUser => {
+      res.status(200).json(editUser)
+    })
+    .catch(err => {
+      res.status(500).json(err.message + " in put users")
+    })
+  }else {
+    res.status(400).json("user not found")
+  }
+})
+
 router.post("/register",(req,res) => {
     const newUser = req.body
     // console.log(req.body)

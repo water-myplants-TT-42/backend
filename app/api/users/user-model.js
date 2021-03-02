@@ -1,3 +1,4 @@
+const dbConfig = require("../../data/db-config")
 const db = require("../../data/db-config")
 
 function find() {
@@ -22,6 +23,14 @@ function findById(id) {
     .select("users.user_id","users.username","users.phoneNumber")
     .first()
 }
+function updateUser(id,changes){
+    return db("users")
+    .where(id)
+    .update(changes)
+    .then((id)=>{
+        return findById(id);
+    })
+}
 
 
 
@@ -29,5 +38,6 @@ module.exports = {
     find,
     findBy,
     findById,
-    add
+    add,
+    updateUser
 }

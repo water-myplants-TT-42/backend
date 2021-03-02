@@ -10,10 +10,12 @@ function findPlantBy(filter) { //filte would be user
     .where(filter)
 }
 
-async function addPlant(plant) {
-    const [id] = await db("plants")
+function addPlant(plant) {
+  return db("plants")
     .insert(plant)
-    return findPlantById(id)
+    .then(([id])=>{
+        console.log(id);
+    })
 }
 
 function findPlantById(id) {
