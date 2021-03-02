@@ -44,7 +44,7 @@ router.post("/login", (req, res) => {
             const token = makeToken(user)
   
             res.status(200).json({ 
-              message: "Here is the user " + user.username,
+              message: "Welcome " + user.username + ". Enjoy your plants!",
               user_id: user.user_id,
               token:token            
             });

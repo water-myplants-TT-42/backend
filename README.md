@@ -31,8 +31,9 @@ Requires:
 Returns:
 
 `{
-"message": "Welcome username",
-    "token": "jsonwebtoken"
+ message: "Welcome " + user.username + ". Enjoy your plants!",
+  user_id: user.user_id,
+  token:"returns jwt token"     
 }`
 
 
