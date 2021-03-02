@@ -13,7 +13,6 @@ router.get("/",(req,res)=>{
     .catch((err)=>{
         res.status(500).json(err)
     })
-    
 })
 
 router.post("/register",(req,res) => {
@@ -46,6 +45,7 @@ router.post("/login", (req, res) => {
   
             res.status(200).json({ 
               message: "Welcome " + user.username,
+              user.user_id,
               token            
             });
           } else {
