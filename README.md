@@ -37,3 +37,11 @@ Returns:
 }`
 
 
+user router
+-take user id  returns all of the users plants
+update user take user id update user at user id
+
+plant router
+add plant - user id adds plants return newplant
+delete plants - plant id deletes plant at plant id
+update plant - plant id update plant at plant id
