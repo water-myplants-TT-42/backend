@@ -61,7 +61,9 @@ Requires:
 
 Returns:
 
-'[{plant objects}]'
+`[
+    {plant objects}
+]`
 
 
 ## Plant end points 
@@ -106,7 +108,7 @@ Requires:
 
 `{
     updated plant info
-}'
+}`
 
 Returns:
 
