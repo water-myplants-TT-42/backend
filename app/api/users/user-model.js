@@ -1,8 +1,12 @@
-const dbConfig = require("../../data/db-config")
+// const dbConfig = require("../../data/db-config")
 const db = require("../../data/db-config")
 
 function find() {
     return db("users")
+}
+function getUserPlants(id) {
+    return db("plants").where("user_id",id)
+
 }
 
 function findBy(filter) {
@@ -25,7 +29,7 @@ function findById(id) {
 }
 function updateUser(id,changes){
     return db("users")
-    .where(id)
+    .where("users.user_id",id)
     .update(changes)
     .then((id)=>{
         return findById(id);
@@ -39,5 +43,6 @@ module.exports = {
     findBy,
     findById,
     add,
-    updateUser
+    updateUser,
+    getUserPlants
 }
