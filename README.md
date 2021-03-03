@@ -3,7 +3,9 @@ https://water-plants-app-tt42.herokuapp.com/
 
 ## User End points
 
-### Register: /api/users/register
+
+
+### Register(POST): /api/users/register
 Requires:
 
 `{
@@ -20,7 +22,7 @@ Returns:
     "phoneNumber": 
 }`
 
-### Register: /api/users/login
+### Login(POST): /api/users/login
 Requires:
 
 `{
@@ -36,12 +38,93 @@ Returns:
   token:"returns jwt token"     
 }`
 
+### Update User info(PUT): /api/users/"user_id" ***Requires Token***
+Requires:
 
-user router
--take user id  returns all of the users plants
-update user take user id update user at user id
+`{
+    "password":"",
+    "phoneNumber":""
+`}
 
-plant router
-add plant - user id adds plants return newplant
-delete plants - plant id deletes plant at plant id
-update plant - plant id update plant at plant id
+Returns
+
+`{
+    "user_id": ,
+    "username": "",
+    "phoneNumber": ""
+}`
+
+### Get User's Plants(GET): /api/users/user_id/plants ***Requires Token***
+Requires:
+
+`Nothing`
+
+Returns:
+
+'[{plant objects}]'
+
+
+## Plant end points 
+
+### Get Plant(GET): /api/plants/plant_id ***Requires Token***
+Requires:
+
+`Nothing`
+
+Returns:
+
+`{
+    "plant_id": "",
+    "nickname": "t",
+    "species": "",
+    "h2oFrequency": "",
+    "user_id": ""
+}`
+
+### Add Plant(POST) /api/plants ***Requires Token***
+Requires:
+
+`{
+    "nickname": "",
+    "species": "",
+    "h2oFrequency": "",
+    "user_id": ""
+}`
+
+Returns:
+
+`{
+    "plant_id": "",
+    "nickname": "t",
+    "species": "",
+    "h2oFrequency": "",
+    "user_id": ""
+}`
+
+### Update Plant(PUT) /api/plants/plant_id ***Requires Token***
+Requires:
+
+`{
+    updated plant info
+}'
+
+Returns:
+
+`{
+    "plant_id": "",
+    "nickname": "t",
+    "species": "",
+    "h2oFrequency": "",
+    "user_id": ""
+}`
+
+### Delete Plant(DELETE) /api/plants/plant_id ***Requires Token***
+Requires:
+
+`Nothing`
+
+Returns:
+
+"Plant `plant_id` was deleted."
+
+
