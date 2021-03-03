@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken")
 const Users = require("./user-model")
 const { isValid } = require("./isValid")
 const { jwtSecret } = require("../../middleware/secret")
+const mw = require("../../middleware/restricted")
 
 router.get("/",(req,res)=>{
     Users.find()
@@ -15,7 +16,17 @@ router.get("/",(req,res)=>{
     })
 })
 
-router.put("/:id", (req,res) => {
+router.get("/:id/plants",mw,(req,res) => {
+  Users.getUserPlants(req.params.id)
+  .then(user => {
+    res.status(200).json(user)
+  })
+  .catch(err => {
+    res.status(500).json(err.message + " in get user plants")
+  })
+})
+
+router.put("/:id",mw, (req,res) => {
   const id = req.params.id
   const body = req.body
   const rounds = process.env.BCRYPT_ROUNDS || 8

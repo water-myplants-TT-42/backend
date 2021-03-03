@@ -1,8 +1,9 @@
 const router = require("express").Router();
 const Plants = require("./plants-model")
+const mw = require("../../middleware/restricted")
 
 
-router.get("/",(req,res)=>{
+router.get("/",mw,(req,res)=>{
     Plants.getPlants()
     .then((plants)=>{
         res.status(200).json(plants)
@@ -12,7 +13,7 @@ router.get("/",(req,res)=>{
     })
 })
 
-router.get("/:id", (req,res) => {
+router.get("/:id",mw, (req,res) => {
     const id = req.params.id
     if(id){
         Plants.findPlantById(id)
@@ -27,11 +28,22 @@ router.get("/:id", (req,res) => {
     }
 })
 
-router.post("/id",(req,res) => {
-   
+router.post("/",mw,(req,res) => {
+    const newPlant = req.body
+    if(newPlant) {
+        Plants.addPlant(newPlant)
+        .then(plant => {
+            res.status(201).json(plant)
+        })
+        .catch(err => {
+            res.status(500).json(err.message + " in post plant")
+        })
+    }else {
+        res.status(400).json("nickname,species and h2oFrequency are required")
+    }
 })
 
-router.put("/:id", (req,res) => {
+router.put("/:id",mw, (req,res) => {
     const id = req.params.id
     const changes = req.body
     if(id,changes) {
@@ -47,12 +59,12 @@ router.put("/:id", (req,res) => {
     }  
 })
 
-router.delete("/:id", (req,res) => {
+router.delete("/:id",mw, (req,res) => {
     const id = req.params.id
     if(id) {
         Plants.remove(id)
         .then(plant => {
-            res.status(200).json(`${plant.nickname} was deleted`)
+            res.status(200).json(`plant number ${id} was deleted`)
         })
         .catch(err => {
             res.status(500).json(err.message + " in delete")

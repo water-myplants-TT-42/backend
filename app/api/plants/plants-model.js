@@ -12,21 +12,22 @@ function findPlantBy(filter) { //filte would be user
 
 function addPlant(plant) {
   return db("plants")
-    .insert(plant)
-    .then(([id])=>{
-        console.log(id);
+    .insert(plant,"plant_id")
+    .then(id=>{
+        // console.log(Number(id) )
+        return findPlantById(Number(id));
     })
 }
 
 function findPlantById(id) {
     return db("plants")
-    .where(id)
+    .where("plant_id",id)
     .first()
 }
 
 function edit(id,changes) {
     return db("plants")
-    .where({id})
+    .where("plant_id",id)
     .update(changes)
     .then(() => {
         return findPlantById(id)
@@ -39,7 +40,7 @@ function edit(id,changes) {
 
 function remove(id) {
     return db("plants")
-    .where(id)
+    .where("plant_id",id)
     .del()
 }
 
