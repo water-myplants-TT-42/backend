@@ -28,12 +28,17 @@ router.get("/:id/plants",mw,(req,res) => {
 
 router.put("/:id",mw, (req,res) => {
   const id = req.params.id
-  const body = req.body
-  const rounds = process.env.BCRYPT_ROUNDS || 8
-  const hash = bcryptjs.hashSync(body.password,rounds)
-        body.password = hash
-  if(id && body) {
-    Users.updateUser(id,body)
+  const credentials = req.body
+  // const rounds = process.env.BCRYPT_ROUNDS || 8
+  // const hash = bcryptjs.hashSync(body.password,rounds)
+  //       body = hash
+  if(id) {
+    if(req.body.password){
+      const rounds = process.env.BCRYPT_ROUNDS || 8
+      const hash = bcryptjs.hashSync(credentials.password,rounds)
+      credentials.password = hash
+    }
+    Users.updateUser(id,credentials)
     .then(editUser => {
       res.status(200).json(editUser)
     })
@@ -99,7 +104,7 @@ router.post("/login", (req, res) => {
       phoneNumber: user.phoneNumber 
     }
     const options = {
-      expiresIn: "400s"
+      expiresIn: "1000s"
     }
     return jwt.sign(payload,jwtSecret,options)
   }
